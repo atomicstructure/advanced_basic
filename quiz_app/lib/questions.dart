@@ -24,14 +24,17 @@ class _QuizQuestionsState extends State<QuizQuestions> {
               answerText: 'Answer 1',
               onPress: () {},
             ),
+            const SizedBox(height: 10),
             AnswerButton(
               answerText: 'Answer 2',
               onPress: () {},
             ),
+            const SizedBox(height: 10),
             AnswerButton(
               answerText: 'Answer 3',
               onPress: () {},
             ),
+            const SizedBox(height: 10),
             AnswerButton(
               answerText: 'Answer 4',
               onPress: () {},
