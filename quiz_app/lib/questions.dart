@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/answer_button.dart';
+import 'package:quiz_app/data/questions.dart';
 
 class QuizQuestions extends StatefulWidget {
   const QuizQuestions({super.key});
@@ -10,36 +11,37 @@ class QuizQuestions extends StatefulWidget {
 
 class _QuizQuestionsState extends State<QuizQuestions> {
   @override
-  Widget build(context) => SizedBox(
-        width: double.infinity,
+  Widget build(context) {
+    final currentQuestion = questions[0];
+
+    return SizedBox(
+      width: double.infinity,
+      child: Container(
+        margin: const EdgeInsets.all(40),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text('The next question is ...',
-                style: TextStyle(color: Colors.white)),
+            Text(
+              currentQuestion.text,
+              style:
+                  const TextStyle(fontFamily: 'palatino', color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
             const SizedBox(
               height: 30,
             ),
-            AnswerButton(
-              answerText: 'Answer 1',
-              onPress: () {},
+            ...currentQuestion.getShuffledAnswers().map(
+              (item) {
+                return AnswerButton(
+                  answerText: item,
+                  onPress: () {},
+                );
+              },
             ),
-            const SizedBox(height: 10),
-            AnswerButton(
-              answerText: 'Answer 2',
-              onPress: () {},
-            ),
-            const SizedBox(height: 10),
-            AnswerButton(
-              answerText: 'Answer 3',
-              onPress: () {},
-            ),
-            const SizedBox(height: 10),
-            AnswerButton(
-              answerText: 'Answer 4',
-              onPress: () {},
-            )
           ],
         ),
-      );
+      ),
+    );
+  }
 }
