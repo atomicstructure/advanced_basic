@@ -4,7 +4,12 @@ import 'package:quiz_app/data/questions.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class QuizQuestions extends StatefulWidget {
-  const QuizQuestions({super.key});
+  const QuizQuestions({
+    super.key,
+    required this.onAnswerSelect,
+  });
+
+  final void Function(String answer) onAnswerSelect;
 
   @override
   State<QuizQuestions> createState() => _QuizQuestionsState();
@@ -13,10 +18,16 @@ class QuizQuestions extends StatefulWidget {
 class _QuizQuestionsState extends State<QuizQuestions> {
   var currentQuestionIndex = 0;
 
-  void answerQuestion() =>
-      // currentQuestionIndex = currentQuestionIndex + 1;
-      // currentQuestionIndex += 1;
-      setState(() => currentQuestionIndex++);
+  void answerQuestion(String selectedAnswer) {
+    widget.onAnswerSelect(selectedAnswer);
+    // currentQuestionIndex = currentQuestionIndex + 1;
+    // currentQuestionIndex += 1;
+    setState(
+      () {
+        currentQuestionIndex++;
+      },
+    );
+  }
   // This does the sanething but only works if you want to increase by 1
 
   @override
@@ -46,7 +57,9 @@ class _QuizQuestionsState extends State<QuizQuestions> {
               (item) {
                 return AnswerButton(
                   answerText: item,
-                  onPress: answerQuestion,
+                  onPress: () {
+                    answerQuestion(item);
+                  },
                 );
               },
             ),
