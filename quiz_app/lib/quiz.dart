@@ -12,11 +12,9 @@ class Questions extends StatefulWidget {
 class _QuestionsState extends State<Questions> {
   var activeScreen = 'Start-Screen';
 
-  void switchScreen() {
-    setState(() {
-      activeScreen = 'questions-screen';
-    });
-  }
+  void switchScreen() => setState(
+        () => activeScreen = 'questions-screen',
+      );
 
   @override
   Widget build(context) {
